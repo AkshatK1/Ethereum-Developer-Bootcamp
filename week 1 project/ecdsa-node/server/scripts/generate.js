@@ -14,4 +14,5 @@ function getAddress(publicKey) {
 }
 
 console.log(`PRIVATE KEY = ${toHex(privateKey)}
-PUBLIC KEY = ${getAddress(publicKey)}`);
+PUBLIC KEY = ${toHex(publicKey)}
+ADDRESS = ${getAddress(publicKey)}`);
