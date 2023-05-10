@@ -46,6 +46,24 @@ function Transfer({ address, setBalance }) {
         ></input>
       </label>
 
+      <label>
+        Signature
+        <input
+          placeholder="Type the generated signature"
+          value={recipient}
+          onChange={setValue(setRecipient)}
+        ></input>
+      </label>
+
+      <label>
+        Public Key (to verify Signature)
+        <input
+          placeholder="type your public key"
+          value={recipient}
+          onChange={setValue(setRecipient)}
+        ></input>
+      </label>
+
       <input type="submit" className="button" value="Transfer" />
     </form>
   );
