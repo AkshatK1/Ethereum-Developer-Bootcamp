@@ -2,9 +2,9 @@ const secp = require("ethereum-cryptography/secp256k1");
 const { toHex, utf8ToBytes } = require("ethereum-cryptography/utils");
 const { keccak256 } = require("ethereum-cryptography/keccak");
 
-const PRIVATE_KEY /* OF SENDER */ = "a7de947171dbcc9c59d66e57ee79320c573ccaa775a5818ed923ec1c5a32b003";
-const FROM_ADDRESS = "0xd07a9f37aa4457b019ca0d31a8ce7c0acf24b8c2";
-const TO_ADDRESS = "0x185f97d99923b78d256d8104bda6bed2a55cb57c";
+const PRIVATE_KEY /* OF SENDER */ = "4edba392eb3253261d8a9164175132f9070b076fd4b3d7c152cbe223f0b73522";
+const FROM_ADDRESS = "0x3f27f34227b2edca970392c46d1c09e7ff472db1";
+const TO_ADDRESS = "0x96f89313669b37d4aef2875ef657aa16f8038366";
 const AMOUNT = 10;
 
 (async () => {
@@ -17,7 +17,7 @@ const AMOUNT = 10;
 
     console.log(message);
 
-    const hashMessage = toHex(keccak256(utf8ToBytes(JSON.stringify(message))));
+    const hashMessage = keccak256(utf8ToBytes(JSON.stringify(message)));
     console.log("HASHED MESSAGE = ", hashMessage);
 
     const [signature, recoveryBit] = await secp.sign(hashMessage, PRIVATE_KEY, { recovered: true });
