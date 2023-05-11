@@ -7,16 +7,20 @@ const FROM_ADDRESS = "0xd07a9f37aa4457b019ca0d31a8ce7c0acf24b8c2";
 const TO_ADDRESS = "0x185f97d99923b78d256d8104bda6bed2a55cb57c";
 const AMOUNT = 10;
 
-const message = {
-    from: FROM_ADDRESS,
-    to: TO_ADDRESS,
-    amount: AMOUNT
-};
+(async () => {
+    // Your code goes here
+    const message = {
+        from: FROM_ADDRESS,
+        to: TO_ADDRESS,
+        amount: AMOUNT
+    };
 
-console.log(message);
+    console.log(message);
 
-const hashMessage = toHex(keccak256(utf8ToBytes(JSON.stringify(message))));
-console.log("HASHED MESSAGE = ", hashMessage);
+    const hashMessage = toHex(keccak256(utf8ToBytes(JSON.stringify(message))));
+    console.log("HASHED MESSAGE = ", hashMessage);
 
-const signature = secp.secp256k1.sign(hashMessage, PRIVATE_KEY);
-console.log(signature);
+    const [signature, recoveryBit] = await secp.sign(hashMessage, PRIVATE_KEY, { recovered: true });
+    console.log("SIGNATURE = ", toHex(signature));
+    console.log("RECOVERY BIT = ", recoveryBit);
+})();

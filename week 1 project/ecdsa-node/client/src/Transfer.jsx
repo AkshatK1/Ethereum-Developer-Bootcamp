@@ -4,12 +4,17 @@ import server from "./server";
 function Transfer({ address, setBalance }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [signature, setSignature] = useState("");
+  const [recoveryBit, setRecoveryBit] = useState("");
+  const [publicKey, setPublicKey] = useState("");
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
 
   async function transfer(evt) {
     evt.preventDefault();
-
+    setSignature(signature);
+    setRecoveryBit(recoveryBit);
+    setPublicKey(publicKey);
     try {
       const {
         data: { balance },
@@ -17,6 +22,9 @@ function Transfer({ address, setBalance }) {
         sender: address,
         amount: parseInt(sendAmount),
         recipient,
+        signature,
+        recoveryBit,
+        publicKey
       });
       setBalance(balance);
     } catch (ex) {
@@ -50,8 +58,17 @@ function Transfer({ address, setBalance }) {
         Signature
         <input
           placeholder="Type the generated signature"
-          value={recipient}
-          onChange={setValue(setRecipient)}
+          value={signature}
+          onChange={setValue(setSignature)}
+        ></input>
+      </label>
+
+      <label>
+        Recovery Bit
+        <input
+          placeholder="Type the generated signature"
+          value={recoveryBit}
+          onChange={setValue(setRecoveryBit)}
         ></input>
       </label>
 
@@ -59,8 +76,8 @@ function Transfer({ address, setBalance }) {
         Public Key (to verify Signature)
         <input
           placeholder="type your public key"
-          value={recipient}
-          onChange={setValue(setRecipient)}
+          value={publicKey}
+          onChange={setValue(setPublicKey)}
         ></input>
       </label>
 
