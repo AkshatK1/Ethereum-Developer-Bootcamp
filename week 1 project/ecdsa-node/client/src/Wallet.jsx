@@ -7,7 +7,7 @@ function Wallet({ address, setAddress, balance, setBalance, privateKey, setPriva
   async function onChange(evt) {
     const privateKey = evt.target.value;
     setPrivateKey(privateKey);
-    const publicKey = secp.secp256k1.getPublicKey(privateKey);
+    const publicKey = secp.getPublicKey(privateKey);
     const address = getAddress(publicKey);
     setAddress(address);
     if (address) {
