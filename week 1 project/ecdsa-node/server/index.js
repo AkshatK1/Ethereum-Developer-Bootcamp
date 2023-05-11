@@ -10,9 +10,9 @@ app.use(cors());
 app.use(express.json());
 
 const balances = {
-  "0xd07a9f37aa4457b019ca0d31a8ce7c0acf24b8c2": 100, // Akshat
-  "0x185f97d99923b78d256d8104bda6bed2a55cb57c": 50, // Aslam
-  "0x75870d7f92d9128937483fd3e0ca1f7511d104ed": 75, // Anurag
+  "0x3f27f34227b2edca970392c46d1c09e7ff472db1": 100, // Akshat
+  "0x96f89313669b37d4aef2875ef657aa16f8038366": 50, // Aslam
+  "0x69a066832b90044432f969411d8eb581070394b4": 75, // Anurag
 };
 
 app.get("/balance/:address", (req, res) => {
@@ -36,9 +36,9 @@ app.post("/send", (req, res) => {
     amount: amount
   };
 
-  const messageHash = toHex(keccak256(utf8ToBytes(JSON.stringify(message))));
-  const recoveryKey = secp.recoverPublicKey(messageHash, signature, recoveryBit);
-  console.log("RECOVERY KEY = ", recoveryKey);
+  const messageHash = keccak256(utf8ToBytes(JSON.stringify(message)));
+  const recoveryKey = secp.recoverPublicKey(messageHash, signature, Number(recoveryBit));
+  console.log("RECOVERY KEY = ", toHex(recoveryKey));
 
   setInitialBalance(sender);
   setInitialBalance(recipient);
