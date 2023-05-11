@@ -35,9 +35,9 @@ function Wallet({ address, setAddress, balance, setBalance, privateKey, setPriva
   );
 }
 
-function getAddress(publicKey) {
+function getAddress(key) {
   // get Address similar to Ethereum
-  const oneByteOff = publicKey.slice(1);
+  const oneByteOff = key.slice(1);
   const keccak256hash = keccak256(oneByteOff);
   const ethKey = '0x' + toHex(keccak256hash.slice(-20));
   return ethKey;
